@@ -14,23 +14,21 @@ function App() {
   return (
     <div className={classes.app}>
       <h1 className={classes.title}>{title}</h1>
-      {renderPage(page)}
+      {renderPage(page, setPages)}
     </div>
   );
 }
 
-const handlePages = setPages => {};
-
-const renderPage = page => {
+const renderPage = (page, setPages) => {
   switch (page) {
     case 'home':
       {
-        return <Options />;
+        return <Options setPage={page => setPages(page)} />;
       }
       break;
     case 'add':
       {
-        return <AddRecipe />;
+        return <AddRecipe setPage={page => setPages(page)} />;
       }
       break;
     default:

@@ -3,63 +3,76 @@ import AppStyling from './AppStyling';
 import { makeStyles } from '@material-ui/core/styles';
 import { TextField, Button } from '@material-ui/core';
 
+import API from './API';
+
 const useStyles = makeStyles(AppStyling);
 
-function AddRecipe() {
+function AddRecipe({ setPage }) {
   const classes = useStyles();
   const [ingredients, setIngredients] = useState([]);
-  const [recipe, recipes] = useState(recipe);
+  const [recipe, setRecipe] = useState({
+    title: '',
+    ingredient: '',
+    quantity: '',
+    method: '',
+    ingredients: []
+  });
 
-  const handlechange = ({ target: { value, id } }) => {
-    switch (id) {
-      case 'ingredient':
-        {
-          setIngredient(value);
-        }
-        break;
-      case 'quantity':
-        {
-          setQuantity(value);
-        }
-        break;
-      case 'method':
-        {
-          setMethod(value);
-        }
-        break;
-      default:
-        break;
-    }
-  };
+  useEffect(() => {
+    console.log(recipe);
+    console.log(setPage);
+  });
 
-  const handleSubmit = () => {
-    API.postRecipe(this.state)
+  const handleRecipeSubmit = () => {
+    API.postRecipe(recipe)
       .then(API.parseJson)
-      .then(data => console.log(data))
+      .then(data => setPage('home'))
       .catch(err => console.log(err));
   };
 
   const handleAdd = () => {
-    setIngredient([
-      ...ingredients,
-      { ingredient: ingredient, quantity: quantity }
-    ]);
+    setRecipe({
+      ...recipe,
+      ingredient: '',
+      quantity: '',
+      ingredients: [
+        ...recipe.ingredients,
+        { ingredient: recipe.ingredient, quantity: recipe.quantity }
+      ]
+    });
+  };
+
+  const handlechange = ({ target: { value, id } }) => {
+    setRecipe({
+      ...recipe,
+      [id]: value
+    });
   };
 
   return (
     <div className={classes.addRecipeWrapper}>
+      <TextField
+        onChange={handlechange}
+        id="title"
+        value={recipe.title}
+        label="Name of Recipe"
+        variant="standard"
+        className={classes.addRecipeTitle}
+      />
       <div className={classes.inputContainer}>
         <div className={classes.ingredientInput}>
           {' '}
           <TextField
             onChange={handlechange}
             id="ingredient"
+            value={recipe.ingredient}
             label="Ingredient"
             variant="standard"
           />
           <TextField
             onChange={handlechange}
             id="quantity"
+            value={recipe.quantity}
             label="Quantity"
             variant="standard"
           />
@@ -70,17 +83,41 @@ function AddRecipe() {
 
         <TextField
           onChange={handlechange}
-          id="outlined-multiline-static"
+          id="method"
           label="Method"
           multiline
           rows={7}
           fullWidth
           defaultValue="Write Your method Here"
         />
-        <Button variant="contained">Add Recipe</Button>
       </div>
+      {renderIngredientList(recipe, classes)}
+      <Button
+        onClick={handleRecipeSubmit}
+        style={{ width: '25vw', margin: 'auto' }}
+        variant="contained"
+      >
+        Add Recipe
+      </Button>
     </div>
   );
 }
+
+const renderIngredientList = (recipe, classes) => {
+  return (
+    <div className={classes.showIngredients}>
+      <h2>Ingredients </h2>
+      <ul>
+        {recipe.ingredients.map(ingredient => {
+          return (
+            <li>
+              {ingredient.ingredient} {ingredient.quantity}
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+};
 
 export default AddRecipe;

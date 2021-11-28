@@ -21,3 +21,8 @@ const parseJson = resp => {
     throw resp.json();
   }
 };
+
+export default {
+  parseJson,
+  postRecipe
+};

@@ -1,3 +1,5 @@
+import { auto } from 'async';
+
 const AppStyling = {
   app: {
     height: '30vh'
@@ -12,18 +14,27 @@ const AppStyling = {
     justifyContent: 'space-around',
     borderBottom: '2px solid black'
   },
-  addRecipeWrapper: {},
+  addRecipeWrapper: {
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  addRecipeTitle: {
+    margin: 'auto',
+    marginBottom: '5vh'
+  },
   inputContainer: {
     display: 'flex',
     flexDirection: 'row',
     gap: '15vw',
     width: '70vw',
-    margin: 'auto',
-    height: '50vw'
+    margin: 'auto'
   },
   ingredientInput: {
     position: 'relative',
     top: '10%'
+  },
+  showIngredients: {
+    marginLeft: '12vw'
   },
   methodInput: {}
 };

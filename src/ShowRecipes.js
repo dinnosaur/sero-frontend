@@ -5,7 +5,7 @@ import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles(AppStyling);
 
-function Options({ setPage }) {
+function ShowRecipes({ setPage }) {
   const classes = useStyles();
   return (
     <div className={classes.optionsAndSearchWrapper}>
@@ -18,4 +18,4 @@ function Options({ setPage }) {
   );
 }
 
-export default Options;
+export default ShowRecipes;
