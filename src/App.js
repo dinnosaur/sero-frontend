@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useRef, useState } from 'react';
+import AppStyling from './AppStyling';
+import { makeStyles } from '@material-ui/core/styles';
+
+import Options from './Options';
+import AddRecipe from './AddRecipe';
+
+const useStyles = makeStyles(AppStyling);
 
 function App() {
+  const [title, setTitle] = useState('Recipes');
+  const [page, setPages] = useState('add');
+  const classes = useStyles();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React hihih
-        </a>
-      </header>
+    <div className={classes.app}>
+      <h1 className={classes.title}>{title}</h1>
+      {renderPage(page)}
     </div>
   );
 }
+
+const handlePages = setPages => {};
+
+const renderPage = page => {
+  switch (page) {
+    case 'home':
+      {
+        return <Options />;
+      }
+      break;
+    case 'add':
+      {
+        return <AddRecipe />;
+      }
+      break;
+    default:
+      {
+        return <Options />;
+      }
+      break;
+  }
+};
 
 export default App;
