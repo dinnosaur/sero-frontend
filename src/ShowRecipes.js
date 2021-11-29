@@ -8,13 +8,13 @@ import Typography from '@mui/material/Typography';
 
 const useStyles = makeStyles(AppStyling);
 
-function ShowRecipes({ recipes, handleSelectedRecipe }) {
+function ShowRecipes({ recipes, handleSelectedRecipe, title }) {
   const classes = useStyles();
   return (
     <>
-      <h2 style={{ textAlign: 'center' }}>My Recipes </h2>
+      <h2 style={{ textAlign: 'center' }}>{title}</h2>
       <div className={classes.showRecipesWrapper}>
-        {renderCards(recipes, handleSelectedRecipe)}
+        {recipes && renderCards(recipes, handleSelectedRecipe)}
       </div>
     </>
   );

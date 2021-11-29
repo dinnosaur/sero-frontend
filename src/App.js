@@ -12,10 +12,11 @@ import API from './API';
 const useStyles = makeStyles(AppStyling);
 
 function App() {
-  const [title, setTitle] = useState('Recipes');
+=
   const [page, setPages] = useState('home');
   const [recipes, setRecipes] = useState([]);
   const [selectedId, setSelectedId] = useState(0);
+  const [filteredRecipes, setFilteredRecipes] = useState([]);
   const classes = useStyles();
 
   useEffect(() => {
@@ -26,7 +27,6 @@ function App() {
   }, [page]);
 
   const handleSelectedRecipe = id => {
-    console.log(id);
     setSelectedId(id);
     setPages('show');
   };
@@ -34,17 +34,34 @@ function App() {
   return (
     <div className={classes.app}>
       <h1 className={classes.title}>{title}</h1>
-      {renderPage(page, setPages, recipes, handleSelectedRecipe, selectedId)}
+      {renderPage(
+        page,
+        setPages,
+        recipes,
+        handleSelectedRecipe,
+        selectedId,
+        filteredRecipes,
+        setFilteredRecipes
+      )}
     </div>
   );
 }
+
+const handleSearch = (recipes, setFilteredRecipes, { target: { value } }) => {
+  const result = recipes.filter(
+    recipe => recipe.title.toLowerCase().indexOf(value) > -1
+  );
+  setFilteredRecipes(result);
+};
 
 const renderPage = (
   page,
   setPages,
   recipes,
   handleSelectedRecipe,
-  selectedId
+  selectedId,
+  filteredRecipes,
+  setFilteredRecipes
 ) => {
   switch (page) {
     case 'home':
@@ -55,6 +72,7 @@ const renderPage = (
             <ShowRecipes
               handleSelectedRecipe={id => handleSelectedRecipe(id)}
               recipes={recipes}
+              title={'My Recipes'}
             />
           </>
         );
@@ -70,7 +88,20 @@ const renderPage = (
     }
     case 'search':
       {
-        return;
+        return (
+          <>
+            <Search
+              handleSearch={e => handleSearch(recipes, setFilteredRecipes, e)}
+              recipes={recipes}
+              setPage={page => setPages(page)}
+            />
+            <ShowRecipes
+              handleSelectedRecipe={id => handleSelectedRecipe(id)}
+              recipes={filteredRecipes}
+              title={'Recipes by Name'}
+            />
+          </>
+        );
       }
       break;
       {
