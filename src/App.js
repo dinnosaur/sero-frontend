@@ -6,6 +6,7 @@ import Options from './Options';
 import AddRecipe from './AddRecipe';
 import ShowRecipes from './ShowRecipes';
 import ShowRecipe from './ShowRecipe';
+import Search from './Search';
 import API from './API';
 
 const useStyles = makeStyles(AppStyling);
@@ -64,9 +65,12 @@ const renderPage = (
         return <AddRecipe setPage={page => setPages(page)} />;
       }
       break;
-    case 'show':
+    case 'show': {
+      return <ShowRecipe id={selectedId} setPage={page => setPages(page)} />;
+    }
+    case 'search':
       {
-        return <ShowRecipe id={selectedId} setPage={page => setPages(page)} />;
+        return;
       }
       break;
       {

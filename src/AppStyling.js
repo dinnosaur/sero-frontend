@@ -55,7 +55,8 @@ const AppStyling = {
     display: 'flex',
     flexDirection: 'row',
     marginRight: '50px',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    flexWrap: 'wrap '
   },
   methodInput: {}
 };

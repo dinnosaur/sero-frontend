@@ -27,7 +27,16 @@ function ShowRecipe({ setPage, id }) {
             {renderIngredientList(recipe, classes)}
             <div>
               <h3>Method </h3>
-              <div>{recipe.method}</div>
+              <div
+                style={{
+                  wordWrap: ' break-word',
+                  whiteSpace: 'pre-wrap',
+                  wordBreak: 'break-word',
+                  width: 250
+                }}
+              >
+                {recipe.method}
+              </div>
             </div>
           </div>
           <div style={{ textAlign: 'center', marginTop: 50 }}>
