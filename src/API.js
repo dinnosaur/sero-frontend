@@ -13,6 +13,15 @@ const postRecipe = recipe => {
   return fetch(BASE_URL + 'recipes', configurationObject);
 };
 
+const fetchAllRecipes = () => {
+  return fetch(BASE_URL + 'recipes');
+};
+
+const fetchRecipe = id => {
+  console.log(2);
+  return fetch(BASE_URL + 'recipes/' + `${id}`);
+};
+
 //Error handling
 const parseJson = resp => {
   if (resp.ok) {
@@ -24,5 +33,7 @@ const parseJson = resp => {
 
 export default {
   parseJson,
-  postRecipe
+  postRecipe,
+  fetchAllRecipes,
+  fetchRecipe
 };

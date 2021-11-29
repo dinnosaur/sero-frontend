@@ -18,11 +18,6 @@ function AddRecipe({ setPage }) {
     ingredients: []
   });
 
-  useEffect(() => {
-    console.log(recipe);
-    console.log(setPage);
-  });
-
   const handleRecipeSubmit = () => {
     API.postRecipe(recipe)
       .then(API.parseJson)
@@ -88,7 +83,7 @@ function AddRecipe({ setPage }) {
           multiline
           rows={7}
           fullWidth
-          defaultValue="Write Your method Here"
+          defaultValue=""
         />
       </div>
       {renderIngredientList(recipe, classes)}

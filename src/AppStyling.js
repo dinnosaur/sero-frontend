@@ -2,7 +2,9 @@ import { auto } from 'async';
 
 const AppStyling = {
   app: {
-    height: '30vh'
+    height: '100vh',
+    width: '100vw',
+    whiteSpace: 'nowrap'
   },
   title: {
     textAlign: 'center'
@@ -31,10 +33,29 @@ const AppStyling = {
   },
   ingredientInput: {
     position: 'relative',
-    top: '10%'
+    top: '10%',
+    display: 'flex',
+    flexDirection: 'column'
   },
   showIngredients: {
     marginLeft: '12vw'
+  },
+  showRecipesWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap ',
+    gap: '5vw',
+    marginLeft: '10px'
+  },
+  showRecipeWrapper: {
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  recipeInfo: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginRight: '50px',
+    justifyContent: 'space-around'
   },
   methodInput: {}
 };
