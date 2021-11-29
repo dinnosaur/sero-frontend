@@ -32,7 +32,7 @@ function App() {
 
   return (
     <div className={classes.app}>
-      <h1 className={classes.title}>{title}</h1>
+      <h1 className={classes.title}>Sero Recipes</h1>
       {renderPage(
         page,
         setPages,
