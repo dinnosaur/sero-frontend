@@ -12,7 +12,6 @@ import API from './API';
 const useStyles = makeStyles(AppStyling);
 
 function App() {
-=
   const [page, setPages] = useState('home');
   const [recipes, setRecipes] = useState([]);
   const [selectedId, setSelectedId] = useState(0);
